@@ -1,7 +1,7 @@
 export type PdfToPngOptions = {
     targetWidth?: number;
     targetHeight?: number;
-    viewportScale: 1;
+    viewportScale?: 1;
     disableFontFace?: boolean;
     useSystemFonts?: boolean;
     enableXfa?: boolean;

@@ -1,6 +1,6 @@
 {
   "name": "@ajwdmedia/pdf-to-png-converter",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Fork of pdf-to-png-converter that adds resolution controls.",
   "homepage": "https://github.com/ajwdmedia/pdf-to-png-converter#readme",
   "bugs": {

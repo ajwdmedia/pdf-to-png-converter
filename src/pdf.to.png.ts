@@ -66,7 +66,7 @@ export async function pdfToPng(pdfFilePathOrBuffer: string | ArrayBufferLike, pr
         }
         const page: pdfApiTypes.PDFPageProxy = await pdfDocument.getPage(pageNumber);
         const initialViewport = page.getViewport({ scale: 1 });
-        let resolvedScale: number = PDF_TO_PNG_OPTIONS_DEFAULTS.viewportScale;
+        let resolvedScale: number = PDF_TO_PNG_OPTIONS_DEFAULTS.viewportScale!;
         if (props?.targetWidth && props?.targetHeight) resolvedScale = Math.min(props.targetWidth / initialViewport.width, props.targetHeight / initialViewport.height);
         else if (props?.targetWidth) resolvedScale = props.targetWidth / initialViewport.width;
         else if (props?.targetHeight) resolvedScale = props.targetHeight / initialViewport.height;

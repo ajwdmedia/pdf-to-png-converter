@@ -2,7 +2,7 @@ import { DocumentInitParameters } from 'pdfjs-dist/types/src/display/api';
 import { normalizePath } from './normalize.path';
 import { PdfToPngOptions } from './types/pdf.to.png.options';
 
-export const PDF_TO_PNG_OPTIONS_DEFAULTS: PdfToPngOptions = {
+export const PDF_TO_PNG_OPTIONS_DEFAULTS = {
     viewportScale: 1,
     disableFontFace: true,
     useSystemFonts: false,
@@ -10,7 +10,7 @@ export const PDF_TO_PNG_OPTIONS_DEFAULTS: PdfToPngOptions = {
     outputFileMask: 'buffer',
     strictPagesToProcess: false,
     pdfFilePassword: undefined,
-};
+} as const satisfies readonly PdfToPngOptions;
 
 export const DOCUMENT_INIT_PARAMS_DEFAULTS: DocumentInitParameters = {
     cMapUrl: normalizePath('./node_modules/pdfjs-dist/cmaps/'),

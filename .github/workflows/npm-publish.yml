@@ -1,5 +1,6 @@
 name: Publish NPM Package
 on:
+  workflow_dispatch:
   release:
     types: [created]
 jobs:
@@ -13,6 +14,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
       - run: npm run build
-      - run: npm publish
+      - run: npm publish --access public -q
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

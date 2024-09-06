@@ -1,8 +1,9 @@
-# pdf-to-png-converter
+# @ajwdmedia/pdf-to-png-converter
 
-Node.js utility to convert PDF file/buffer pages to PNG files/buffers without binary and OS dependencies (except MacOs on arm64).
+Node.js utility to convert PDF file/buffer pages to PNG files/buffers without binary and OS dependencies (except MacOs on arm64).  
 
-[![Tests on push](https://github.com/dichovsky/pdf-to-png-converter/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/dichovsky/pdf-to-png-converter/actions/workflows/test.yml)
+Adds support for specifying a target resolution instead of scale.  
+This version is less maintained than `png-to-pdf-converter`. If you don't need resolution controls, use the original.  
 
 ## Getting started
 
@@ -19,7 +20,7 @@ arch -arm64 brew install pkg-config cairo pango libpng librsvg
 Installation:
 
 ```sh
-npm install -D pdf-to-png-converter
+npm install @ajwdmedia/pdf-to-png-converter
 ```
 
 ## Example
@@ -31,7 +32,9 @@ test(`Convert PDF To PNG`, async () => {
         disableFontFace: false, // When `false`, fonts will be rendered using a built-in font renderer that constructs the glyphs with primitive path commands. Default value is true.
         useSystemFonts: false, // When `true`, fonts that aren't embedded in the PDF document will fallback to a system font. Default value is false.
         enableXfa: false, // Render Xfa forms if any. Default value is false.
-        viewportScale: 2.0, // The desired scale of PNG viewport. Default value is 1.0.
+        targetWidth: 1920,
+        targetHeight: 1080, // Specify a target width and height. Will scale to fit within the bounds (similar to "object-fit: cover"). If only one is specified, the other is implied.
+        viewportScale: 2.0, // The desired scale of PNG viewport. Default value is 1.0. Takes precedence over resolution controls if specified.
         outputFolder: 'output/folder', // Folder to write output PNG files. If not specified, PNG output will be available only as a Buffer content, without saving to a file.
         outputFileMask: 'buffer', // Output filename mask. Default value is 'buffer'.
         pdfFilePassword: 'pa$$word', // Password for encrypted PDF.
@@ -56,8 +59,6 @@ test(`Convert PDF To PNG`, async () => {
 }
 ```
 
-## Buy Me A Coffee
+## Support
 
-In case you want support my work
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/dichovsky)
+This is a fork of the [original project](https://github.com/dichovsky/pdf-to-png-converter). If you would like to support, please send love to the original maintainer.

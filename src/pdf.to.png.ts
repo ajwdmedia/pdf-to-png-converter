@@ -65,12 +65,15 @@ export async function pdfToPng(pdfFilePathOrBuffer: string | ArrayBufferLike, pr
             continue;
         }
         const page: pdfApiTypes.PDFPageProxy = await pdfDocument.getPage(pageNumber);
-        const viewport: pdfDisplayUtilsTypes.PageViewport = page.getViewport({
-            scale:
-                props?.viewportScale !== undefined
-                    ? props.viewportScale
-                    : (PDF_TO_PNG_OPTIONS_DEFAULTS.viewportScale as number),
-        });
+        const initialViewport = page.getViewport({ scale: 1 });
+        let resolvedScale: number = PDF_TO_PNG_OPTIONS_DEFAULTS.viewportScale;
+        if (props?.targetWidth && props?.targetHeight) resolvedScale = Math.min(props.targetWidth / initialViewport.width, props.targetHeight / initialViewport.height);
+        else if (props?.targetWidth) resolvedScale = props.targetWidth / initialViewport.width;
+        else if (props?.targetHeight) resolvedScale = props.targetHeight / initialViewport.height;
+
+        if (props?.viewportScale) resolvedScale = props.viewportScale;
+
+        const viewport: pdfDisplayUtilsTypes.PageViewport = page.getViewport({ scale: resolvedScale });
         const canvasAndContext: CanvasContext = canvasFactory.create(viewport.width, viewport.height);
 
         const renderContext: pdfApiTypes.RenderParameters = {

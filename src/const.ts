@@ -10,7 +10,7 @@ export const PDF_TO_PNG_OPTIONS_DEFAULTS = {
     outputFileMask: 'buffer',
     strictPagesToProcess: false,
     pdfFilePassword: undefined,
-} as const satisfies readonly PdfToPngOptions;
+} as const satisfies PdfToPngOptions;
 
 export const DOCUMENT_INIT_PARAMS_DEFAULTS: DocumentInitParameters = {
     cMapUrl: normalizePath('./node_modules/pdfjs-dist/cmaps/'),
